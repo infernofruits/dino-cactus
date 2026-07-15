@@ -159,7 +159,47 @@
         <canvas id="gameCanvas" width="800" height="400"></canvas>
     </div>
 
+<script>
+    const canvas =document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const uiOverlay= document.getElementById('ui-overlay');
+    const startBtn = document.getElementById('start-btn');
+    const exitBtn = document.getElementById('exit-btn');
+    const inGameExitBtn = document.getElementById('in-game-exit-btn');
+    const gameOverText = document.getElementById('game-over-text');
+    const gameContainer = document.getElementById('game-container');
+    const slowModeCheckbox = document.getElementById('slow-mode-checkbox');
 
+    let gameActive = false;
+    let score = 0;
+    let highscore= 0;
+    let gameSpeed = 6.5;
+    let startingSpeedSetting = 6.5;
+    let frameCount = 0;
+    let nextObstacleFrame = 100;
+    let nextBuffFrame = 300;
+    let stars =[];
+    let obstacles = [];
+    let activeBuffs=[];
+    let lastTimeState = 'day';
+
+    let currentWeather = 'clear';
+    let weatherTimer=0;
+    let weatherParticles = [];
+    let weatherTagetFrame = 0;
+    const groundY = 320;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+        }
+    }
+
+
+
+</script>
 
             
 </html>
