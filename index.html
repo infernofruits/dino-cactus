@@ -142,7 +142,23 @@
 
     <h1>SURVIVING DINOS AS A CACTUS SPEEDRUN</h1>
     <p>Controls:[Space/Up Arrow] to Jump | [Down Arrow] to Duck</p>
-            
+    
+    <div id="game-container">
+        <button id="in-game-exit-btn" class="hidden">EXIT</button>
+        <div id="ui-overlay">
+            <div id="game-over-text" class="hidden">GAME OVER</div>
+            <div class="btn-group">
+                <button id="start-btn">PLAY GAME</button>
+                <button id="exit-btn" class="hidden">EXIT</button>
+            </div>
+            <label class="toggle-container">
+                <input type="checkbox" id="slow-mode-checkbox">
+                Relaxed Start (Slower Speed)
+            </label>
+        </div>
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+    </div>
+
 
 
             
