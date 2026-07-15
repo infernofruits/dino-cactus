@@ -193,10 +193,70 @@
     function initAudio() {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
         }
     }
 
+    function playSound(type) {
+        try {
+            initAudio();
+            if(!audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx)
+
+            const now = audioCtx.destination();
+
+            if (type === 'start') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(300,now);
+                osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+                osc.frequency.exponentRampToValueAtTime(1200, now + 0.25);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01 , now + 0.28);
+                osc.start(now);
+                osc.stop(now + 0.28);
+            }
+            else if (type === 'jump') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(200, now);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0.01 , now + 0.18);
+                osc.start(now);
+                osc.stop(now + 0.18);
+            }
+            else if (type === 'timeChange') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440,now);
+                osc.frequency.linearRampToValueAtTime(330, now + 0.4);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0.001,now+0.45);
+                osc.start(now);
+                osc.stop(now + 0.45);
+            }
+            else if ( type === 'buff') {
+                osc.type ='sine';
+                osc.frequency.setValueAtTime(600,now);
+                osc.frequency.exponentialRampToValueAtTime(1500, now + 0.2);
+                gain.gain.setValueAtTime(0.2 , now);
+                gain.gain.linearRampToValueAtTime(0.01,now + 0.2);
+                osc.start(now);
+                osc.stop(now + 0.2);
+            }
+             else if (type ==='death') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(350,now);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0.01,now+0.5);
+                osc.start(now);
+                osc.stop(now + 0.5);
+             }
+        } catch (e) {
+            console.log("Audio skipped",e);
+        }
+    }
+    
 
 
 </script>
