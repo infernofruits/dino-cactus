@@ -465,6 +465,63 @@
             color: "#4636a" , underbelly:"#87748c", pattern:"#1f1521"
         }
     ];
+
+    class Obstacle{
+        constructor(proto){
+            this.name=proto.name;
+            this.width=proto.width;
+            this.height;
+            this.type=proto.type;
+            this.x=canvas.width+50;
+            this.speed=gameSpeed * proto.speedMod;
+            this.color=proto.color;
+            this.underbelly=proto.underbelly;
+            this.pattern = proto.underbelly;
+            this.pattern=proro.pattern;
+            this.wingPhase=Math.random() * Math.PI;
+            if(this.type==="gound") {
+                this.y= groundY - this.height;
+            }  else if(this.type==="low-fly") {
+                this.y = groundY - this.height - 35;
+            }  else if(this.type==="high-fly") 
+                this.y=groundY - this.height - 95;
+        }
+    }
+
+    update () {
+        let basemodifier = 1.0;
+        if(activeEffects.slowmo > 0) baseModifier *=0.5;
+        if(activeEffects.speed> 0) baseModifier *=1.4;
+
+        this.x-= this.speed * baseModifer;
+        this.wingphase+=0.25;
+    }
+     draw() {
+        ctx.save();
+         
+        ctx.fillStyle="rgba(0,0,0,0.15)";
+        ctx.beginPath();
+        ctx.ellipse(this.x+ this.width/2, groundY, this.width/2 *(1 -( groundY - this. y - this.height)/300),8,0,0,Math.PI *2);
+        ctx.fill();
+
+        let gard= ctx.createLinearGradient(this.x,this.y,this.x,this.y+ this.height);
+        gard.addColorStop(0, this.color);
+        grad.addColorStop(0.6,this.color);
+        ctx.fillStyle=grad;
+
+        if(this.type.includes("fly")) {
+            let wingY = Math.sin( this.wingPhase)* (this.height*0.7);
+
+            ctx. beingPath();
+            ctx.ellipse(this.x+ this.width*0.5, this.y+this.height*0.25,this.height*0.2,0,0, Math.PI*2);
+            ctx.fill();
+
+            ctx.beingPath();
+            ctx.moveTo(this.x + this.width*0.4, this.y + this.height*0.4);
+            ctx.lineTo(this.x+this.width*0.1, this.y + this.height*0.2);
+            ctx
+        }
+     }
             
 
 
