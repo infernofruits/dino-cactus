@@ -599,9 +599,62 @@
 
                 if(currentWeather==='rainy') {
                     skytop="#2c3e50"; skybottom="#34495e"; groundColor="#566573"; lineColor="#424949";
-                    skyObject="=type:'cloud', x:700, y:60,color: '#1a25f', glow:
-                }
-            }
+                    skyObject={ type:'cloud', x:700, y:60, color:'#1a252f',glow:'rgba(0,0,0,0)'};
+                    gameContainer.style.borderColor="#2c3e50";
+                    return{ skytop, groundColor, lineColor,skyObject,cycle};
+                    } 
+                    else if (currentWeather==='sandstorm') {
+                        skytop="#b7950b"; skybottom="#d68910"; groundColor="#a04000"; lineColor="7e5109";
+                        skyObject={ type:'haze', x:700,y:60,color:'#9a7d0a',glow: 'rgba(0,0,0,0)'};
+                        gameContainer.style.borderColor="#b7950b";
+                        return{ skytop,bottom,groundColor,lineColors,skyObject,cycle};
+                    }
+                    if(cycle<0.25) {
+                       skytop="#3e5ab"; skybottom="E7C980"; groundColor="#d2b48c";lineColors="#c2a66b";
+                       skyObject={type:'sun',x: 700, y:60, color:'#ffffa0',glow:'rgba(243,229,171,0)'};
+                       gameContained.style.borderColor="#333";
+                       currentTimeState='day';  
+                    }else if (cycle<0.45) {
+                        let p=(cycle-0.25) /0.20;
+                        skyTop=blendColors("#f3e5ab","#e65c00",p);
+                        skybottom=blendcolors("#e7cc980","#f9d423",p);
+                        groundColors=blendColors("#d2b48c","#a0522d",p);
+                        lineColors=blendColors("#c2a66b", "#8b4513",p);
+                        skyObject={type:'sun',x:700,y:60+(p*150), color: '#ffdd66', glow:'rgba(230,92,0,0)'};
+                        gameContainer.style.borderColor = "#5a2d0c";
+                        currenttimeState='sunset';
+                    } else if (cycle<0.80) {
+                        let p=0;
+                        if(cycle<0.50)p=(cycle-0.45)/0.05;
+                        else p=1;
+
+                        skyTop=bledColors("#e65c00","#0f2027",p);
+                        skybottom=blendcolors("#f9d423","#203a43",p);
+                        groundColor=blendcolors("#a0522d","#2c3e50",p);
+                        lineColors=bledColors("#8b4513","#1a252f",p);
+                        skyobject={type:'moon',x:150,y:70,color:'#ffffff',glow: 'rgba(255,255,255,0)'};
+                        gamecontainer.style.borderColor="#1a3644";
+                        currentTimeState='night';
+                    } else{
+                        let p=(cycle-0.80)/0.20;
+                        skytop=blendColors("#0F2027","f3e5ab",p);
+                        skybottom=blendColors("#203a43","#e7c980",p);
+                        groundColors=blendColors("#2c3e50", "#d2b48c",p);
+                        skyObject={ type:'sun',x:700,y:210-(p*150),color:'#ffffa0',glow:'rgba(243,229,171,0)'};
+                        gameContainer.style.borderColor="#333";
+                        currentTimeState='sunrise';   
+                    }
+
+                    if(gameActive&& currentTimeState !== lastTimeState&&(cureentTtimeState==='night'|| currentTimeState==='day')) {
+                        playSound('timechanges');
+                        lastTimeState= currentTimeState;
+                    }else if(!gameActive) {
+                        lastTimeState;current
+                    }
+                    
+                
+                     
+
 
 
             
