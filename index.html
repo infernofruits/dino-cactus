@@ -390,6 +390,36 @@
         ctx.restore();
     }
 
+    const cactus = {
+        x: 100,
+        y: groundY - 90,
+        width: 65,
+        height: 90,
+        baseHeight = 90,
+        duckHeight: 45,
+        vy: 0,
+        gravity: 0.85,
+        jumpStrength: -18.5,
+        isJumping : false,
+        isDucking:false,
+
+        update() {
+            if(this.Jumping) {
+                this.vy += this.gravity;
+                this.vy += this.vy;
+
+                if(this.y >= groundY - this.height) {
+                    this.y = groundY - this.height;
+                    this.vy =0;
+                    this.isJumping = false;
+                }
+            }
+             
+            if ( this.is)
+        }
+
+    }
+
 
 
 
