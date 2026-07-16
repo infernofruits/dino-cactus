@@ -328,7 +328,7 @@
         ctx.save();
 
         if (activeEffects.shield > 0) {
-            ctx.strokeStyle = "rgba(0,191,255," + (0.3 + Math.sin(frameCount 8 0.15)*0.2)+")";
+            ctx.strokeStyle = "rgba(0,191,255," + (0.3 + Math.sin(frameCount * 0.15)*0.2)+")";
             ctx.lineWidth = 6;
             ctx.beginPath();
             ctx.arc(x+w/2,y+h/2, Math.max(w,h)/2 + 8 , 0, Math.PI * 2);
@@ -395,7 +395,7 @@
         y: groundY - 90,
         width: 65,
         height: 90,
-        baseHeight = 90,
+        baseHeight : 90,
         duckHeight: 45,
         vy: 0,
         gravity: 0.85,
@@ -415,10 +415,58 @@
                 }
             }
              
-            if ( this.is)
-        }
+            if ( this.isDucking && !this.isJumping) {
+                this.height=this.duckHeight;
+                this.y = groundY - this.duckHeight;
+            } else if (!this.isJumping) {
+                this.height = this.bsaeHeight;
+                this.y = groundY - this.baseHeight;
+            }
+        },
 
-    }
+        jump() {
+            if ( !this.is && !this.isDucking) {
+                this.vy = this.jumpStrength;
+                this.isJumping = true;
+                this.height = this.baseHeight;
+                playSound('jump')
+            }
+        },
+
+        draw() {
+            drawCactusTexture(ctx,this.x,this.y,this.width,this.height,this.isDucking && !this.isJumping);
+        }
+    };
+      
+    const dinoTypes = [
+        {
+            name: "Velocriraptor",
+            width: 70, height: 55, type: "ground", speedMod: 1.1,
+            color: "#4a533c" , underbelly:"#8b8368", pattern: "#262b1e"
+        },
+        {
+            name:"T-Rex",
+            width:100, height:105, type:"ground", speedMod: 0.85,
+            color: "#8c2d19", underbelly: "#d9a07b", pattern:"#4a1207"
+        },
+        {
+            name:"Spinosaurus",
+            width: 110, height: 85, type:"ground", speedMod: 0.95,
+            color: "#1f4454", underbelly:"#6aa1b6", pattern:"#d96216"
+        },
+        {
+            name:"Stegosaurus",
+            width:50 , height:35, type:"high-fly", speedMod: 1.4,
+            color: "#78225e", underbelly:"#c981b5", pattern: "#ffffa0"
+        },
+        {
+            name:"Pterdactyl",
+            width:80, height:45, type:"low-fly" , speedMod: 1.15,
+            color: "#4636a" , underbelly:"#87748c", pattern:"#1f1521"
+        }
+    ];
+            
+
 
 
 
