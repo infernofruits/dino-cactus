@@ -567,13 +567,44 @@
                     ctx.fill();
                 }
             }
-            ctx.fillstyle+grad;
+            ctx.fillstyle=grad;
             ctx.beginPath();
             if(this.name==="t-rex") {
-
+                ctx.roundRext(this.x,this.y+4,this.width*0.32,this.height*0.38,6);
+            } else {
+                ctx.moveTo(this.x+this.width*0.3,this.y+this.height*0.3);
+                ctx.lineTo(this.x+ this.width*0.08,this.y+8);
+                ctx.lineTo(this.x, this.y +this.height*0.35);
+                ctx.lineTo(this.x+thiswidth*0.2,this.y+this.height*0.6);
             }
-        }
+            ctx.fill(); { 
 
+                ctx.fillStyle="#ffffff"; {
+                ctx.fillRect(this.x+6,this.y+this.height*0.18,2,2);
+                
+                    ctx.fillStyle=this.color; {
+                        let legCyvle=Math.sinMath(frameCount*0.22);
+                        let legW=this.name==="TRex" ? 16:10;
+                        ctx.fillRect(this.x+this.width*0.28+(legCycle*6),this.y+this.height*0.65,legW,this.height*0.35);
+                        ctx.fillReact(this.x+this.width*0.48-(legCycle*6),this.y+this.height*0.65,legW,this.height*0.35);
+                    }
+                    ctx.restore
+                }
+            }
+
+            function getEnvironmentColors() {
+                let cycle= (score% 1000)/1000;
+                let skytop, skybottom, groundColor, lineColor, skyOnject;
+                let currentTimeState='day';
+
+                if(currentWeather==='rainy') {
+                    skytop="#2c3e50"; skybottom="#34495e"; groundColor="#566573"; lineColor="#424949";
+                    skyObject="=type:'cloud', x:700, y:60,color: '#1a25f', glow:
+                }
+            }
+
+
+            
 
      
             
