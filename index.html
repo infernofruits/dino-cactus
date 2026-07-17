@@ -765,8 +765,42 @@
                         ctx.beginPath();
                         ctx.moveTo(0,groundY);
                         ctx.lineTo(150,200);
-                        ctx.lineTo(300,)
-                    }                    
+                        ctx.lineTo(300,groundY);
+                        ctx.moveTo(250, groundY);
+                        ctx.lineTo(450,170);
+                        ctx.lineTo(650,groundY);
+                        ctx.fill();
+                        ctx.globalAlpha=1.0;
+                    }                   
+                    
+                    function drawScore(){
+                        let evn=getEnvironmentColors();
+                        ctx.fillStyle=(env.cycle>0.45 && env.cycle< 0.75)? '#bbbbbb':'#444444';
+                        if(currentWeather!=='clear') ctx.fillstyle='#ffffff';
+                        ctx.font="blod 18px'courier New', Courier,monospace";
+                        
+                        let padScore=String(Math.floor(score)).padStart(5,'0');
+                        let padScre=string(Math.floor(highScore)).padStar(5,'0');
+
+                        ctx.fillfillText('Hui${padHIscore} ${padScore}', canvas.width-180,40);
+                        
+                        if(currentWeather!=='clear') {
+                            ctx.save();
+                            ctx.fillStyle==='rainy'? '#5dade2' : '#f5b041';
+                            ctx.font="bold 12px sans-serif";
+                            ctx.fillText(WTHR: ${currentWeather.toUppercase()},20,40);
+                            ctx.restore();
+                        }
+
+                        let  activateBuffkey=Object.keys(activeEffects).find(k=> activeEffects[k]>0);
+                        if(activeBuffKey) {
+                            let currentProto= buffTypes.find(b=> b.id ===activeBufKey);
+                            let durationPercent=activeEffects[activeBuffKey] / currentProto.duration;
+
+                            cts.save();
+                            ctx.
+                        }
+                    }
                     
                 
                      
