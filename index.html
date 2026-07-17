@@ -649,8 +649,61 @@
                         playSound('timechanges');
                         lastTimeState= currentTimeState;
                     }else if(!gameActive) {
-                        lastTimeState;current
+                        lastTimeState;currentTimeState;
                     }
+
+                    return{ skytop,skyBottom, groundColor, skyObject,cycle};
+                    .
+
+                    function blendColors(color1,color2,perecntage) {
+                        let el1=color1.match(/\w\w/g).map(x => parseTnt(x,16));
+                        let el2=color2.match(/\w\w/g).map(x=> parseInt(x,16));
+                        let blended = el1.map((scr,i)=>Math.round(scr+ (el2[i]-src)*percentage));
+                        return "#" + blended.map(x=> x.toString(16).padStart(2,'0')).join('');
+                    } 
+
+                    function updateAndDrawWeatherEffects() {
+                        if(currebtWeather==='clear') return;
+
+                        if (weatherParticles.length<120) {
+                            weatherParticles.push({
+                                x:Math.random()* (canvas.width+200),
+                                y:Math.random()*canvas.height-50,
+                                length:Math.random()*20+10,
+                                sppedX: currentWeather==='rainy'?-3:-12,
+                                speedy:math.random()*2+1
+                            });
+                        }
+
+                        ctx.save();
+                        if(currentWeather==='rainy') {
+                            ctx.strokeStyle+'rgba(174,214,241,0.4)';
+                            ctx.lineWidth=1.5;
+                            for(let i=0; < weatherParticles.length; i++){
+                                let p= weatherParticles[i];
+                                p.x+=p.speedX;
+                                p.y+=p.sppedy;
+
+                                ctx.beginpath();
+                                ctx.moveTo(p.x,p.y);
+                                ctx.lineTo(p.x,p.y);
+                                ctx.stroke();
+
+                                if(p.y> canvas.height|| p.x<-20) {
+                                    p.y=-20;
+                                    p.x=Math.random() * (canvas.width+100);
+                                }
+                            }
+                        }
+                        else if(currentWeather==='sandstorm') {
+                            ctx='rgba(245,176,65,0.25)';
+                            for(let i=0 ;i<weatherParticles.length;i+++) {
+                                let p= weathers[i];
+                                
+                            }
+                        }
+                    }
+                    
                     
                 
                      
