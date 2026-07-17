@@ -699,11 +699,74 @@
                             ctx='rgba(245,176,65,0.25)';
                             for(let i=0 ;i<weatherParticles.length;i+++) {
                                 let p= weathers[i];
+                                p.x+=p.speedX;
+                                p.y+=p.speedY+Math.sin(frameCount*0.05+i)*0.5;
                                 
+                                ctx.fiect(p.x, p.lenght*1.8,p.size);
+
+                                if(p.x<-150) {
+                                    p.x= canvas.width+50;
+                                    p.y=Math.random()*canvas.height;
+                                }
                             }
                         }
+                        ctx.restore();
                     }
-                    
+
+                    function  drawScenery(){
+                        let env = getEnvironmentColor();
+
+                        let skyGard=ctx.createLinearGardient(0,0,0,groundY);
+                        skygate.addColorStop(0,env.skyTop);
+                        Grad.addcolorStop(1,env,skybottom);
+                        ctx.fillStyle=skyGrad;
+                        ctx.fillRect(0,0,canvas.width,groundY);
+
+                        ctx.fillStyle=env.grounColor;
+                        ctx.fillRect(0,groundY,canvas.height-groundY);
+
+                        if(currentWeather=='clear'&& env.cycle> 0.35 && env.cycle<0.85) {
+                            let opacity=0;
+                            if(envle> 0.35 && env.cycle<=0.45)opacityMod=(env.cycle-0.35)/0.10;
+                            else if(env.cycle> 0.45 &&en.cycle<=0.75)opacityMod==1;
+                            else opacityMod= (0.85-env.cycle)/0.10;
+
+                            ctx.save();
+                            stars.forEach(star=>{
+                                ctx.fillstyle='rgba(255,255,255,${star.alpha*opacityMod})';
+                                ctx.fillect(star.x,star.y,star.size,star.size);
+                            })
+                            ctx.restore(); 
+                        }
+                 
+                        if(env.skyObject.type==='sun'|| env.skyObject.type==='moon') {
+                            let objGard=ctx.createRadiGardialGardient(env. skyObject.x,env.object.y,5,env.Object.x,env.skyObject.y,55);
+                            objgard.addColorStop(0,env.skyObject.color);
+                            objGard.addcolorstop(1,env.skyObject.glow);
+                            ctx.fillsstyle=objgrad;
+                            ctx.beginPath();
+                            ctx.arc(env.skyObject.x,env.skyObject.y,55,0,Math.PI*2);
+                            ctx.fill();
+                        }
+
+                        ctx.strokeStyle=env.lineColors;
+                        ctx.lineWidth=2;
+                        for(let i=o; i < canvas.width;i+=180) {
+                            ctx.beingPath();
+                            ctx.moveTo(i,groundY+15);
+                            ctx.lineTo(i,100,groundY+15);
+                            ctx.moveTo(i+50,ground+45);
+                            ctx.lineTo(i+130, groundY+45);
+                            ctx.stroke();
+                        }
+
+                        ctx.fillStyle=env.skybottom;
+                        ctx.globalAlpha=0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(0,groundY);
+                        ctx.lineTo(150,200);
+                        ctx.lineTo(300,)
+                    }                    
                     
                 
                      
