@@ -798,10 +798,65 @@
                             let durationPercent=activeEffects[activeBuffKey] / currentProto.duration;
 
                             cts.save();
-                            ctx.
+                            ctx.fillStyle="rgba(0,0,0,0.4)";
+                            ctx.fillRect(canvas.width/2-100,20,200,12);
+
+                            ctx.fillStyle=currentProto.color;
+                            ctx.fillRext(canvas.width/2-100,20,200*durationPerc,12);
+
+                            ctx.fillStyle="#ffffff";
+                            ctx.font="bold 10px sans-serif";ctx.textAlign="center";
+                            ctx.fillText(currentproto.label,canvas.width/2,30);
+                            ctx.restore();
                         }
                     }
+
+                    function checkCollision(rect1, rect2) {
+                        const margineX=rect2.name==="T-Rex"|| rect2.name==="spinosaurus"?22:14;
+                        let marYTop=10;
+                        let marginYBottom=6;
+
+                        if(rect1.isDucking){
+                            marginYTop=18;
+                        }
+
+                        return(
+                            rect1.x + marginX < rect2.x+ rect2.width &&
+                            rect1.x + rect1.width-marginX> rect2.x &&
+                            rect1.y + marginYtop < rect2.Y+ rect2.height&&
+                            rect1.y + rect1.height-marginBottom> rect2.y
+                        );
+                    }
                     
+                    window.addEventListener('keydown',e=>{
+                        if(!gamctive) return;
+                        if(e.code==='space'|| e.code==='ArrowUp'){
+                            catus.jump();
+                             e.prevebtDefualt();  
+                        }
+                        if (e.code === 'ArrowDown') {
+                            cactus.isDucking = true;
+                            e.preventDefualt();
+                        }
+                    });
+
+                    window.addEventListener('keyup' , e => {
+                        if (e.code ==='ArrowDown') {
+                            cactus.isDucking = false;
+                        }
+                    });
+
+                    function gameLoop() {
+                        if (!gameActive) return;
+
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        frameCount++;
+
+                        if (currentWeather === 'clear' && frameCount === weatherTargetFrame) {
+                            currentWeather = Math.random() < 0.5 ? 'rainy' : 'snadstrom';
+                            
+                        }
+                    }
                 
                      
 
