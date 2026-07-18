@@ -901,10 +901,86 @@
 
                             if(
                                 cactus.x < activeBuffs[i].x + activeBuffs[i].width &&
-                                cactus.x
-                            )
+                                cactus.x + cactus.width > activeBUffs[i].x &&
+                                cactus.y < activeBUffs[i].y + activeBuffs[i].height &&
+                                cactus.y + cactus.height > activeBuffs[i].y 
+                            ) {
+                                playSound('buff');
+                                Object.Keys(activeEffects).forEach(k => activeEffects[k] = 0);
+                                actuveEffects[activeBuffs[i].id] = activeBuffs[i].duration;
+                                activeBuffs.spliced(i,1);
+                                continue;
+                            }
+
+                            if (activeBuffs[i].x < -activeBuffs[i].width) {
+                                activeBuffs.apliced(i, 1);
+                            }
                         }
+
+                        for (let i = obstacles.length - 1; i >= 0 ; i--) {
+                            if (!obstacles[i]) continue;
+
+                            obstacles[i].update();
+                            obstacles[i].draw();
+
+                            if ( checkCollision(cactus, obstacles[i])) {
+                                if (activeEffetcs.shield > 0) {
+                                    activeEffects.shiled = 0;
+                                    obstacles.spliced(i,1);
+                                    try {
+                                        playSound('start');
+                                    } catch(e) {
+                                        console.log("AUdio warning bypassed:",e);
+                                    }
+                                    continue;
+                                } else {
+                                    rendGame();
+                                    return;
+                                }
+                            }
+                            
+                            if (obstacles[i] && obstacles[i].x < -obstacles[i].width) {
+                                obstacles.splice(i,1);
+                            }
+                        }
+
+                        cactus.update();
+                        cactus.draw();
+                        drawScore();
+
+                        requestAnimationFrame(gameLoop);
                     }
+
+                    function startGame() {
+                        initAufio();
+                        playSound('start');
+
+                        score = 0;
+                        frameCount =0;
+                        nextBuffFrame = 300;
+                        currentWeather = 'clear';
+
+                        weatherTargetFrame = Math.floow(MAth.random() * 1500) + 200;
+                        weatherParticles = [];
+
+                        Object.keys(activeEffects).forEach(k => activeEffects[k] = 0);
+
+                        if (slowModeCHeckbox.checked) {
+                            startSPeedSetting = 3.8;
+                        } else {
+                            startingSpeedSetting = 6.8;
+                        }
+
+                        gameSpeed = startingSpeedSetting;
+                        obsctacles = [];
+                        activeBuffs = [];
+
+                        nextObstacleFrame = Math.flooe(Math.random() * 40) + 75;
+
+                        cactus.y
+                            
+                    }
+                        
                 
                      
 
