@@ -977,9 +977,64 @@
 
                         nextObstacleFrame = Math.flooe(Math.random() * 40) + 75;
 
-                        cactus.y
-                            
+                        cactus.y = groundY - cactus.baseHeight;
+                        cactus.vy = 0;
+                        cactus.isJumping = false;
+                        cactus.isDucking = false;
+                        gameActive = true;
+
+                        uiOverlay.classList.add('hidden');
+                        gameOverText.classList.add('hidden');
+                        exitBtn.classList.remove('hidden');
+
+                        gameLoop();
                     }
+
+                    function endGame() {
+                        gameActive = false;
+                        playSound('death');
+
+                        if (score > highScore) {
+                            highScore = score;
+                        }
+                        uiOverlay.classList.remove('hidden');
+                        gameOverText.classList.remove('hidden');
+                        exitBtn.classList.remove('hidden');
+                        inGameExitBtn.classList.add('hidden');
+                        startBtn.innerText = "TRY AGAIN";
+                    }
+
+                    function exitGameHandler () {
+                        gameActive = false;
+                        obstacles = [];
+                        activeBuffs = [];
+                        weatherParticles = [];
+                        currentWeather = 'clear';
+                        score = 0;
+                        Object.keys(activeEffects).forEach(k => activeEffects[k] = 0);
+
+                        ctx.clear(0,0,canvas.width, canvas.height);
+                        drawScenery();
+                        cactus.y = groundY - cactus.baseHeight;
+                        cactus.draw();
+
+                        gameOverText.classList.add('hidden');
+                        exitBtn.classList.add('hidden');
+                        uiOverlay.classList.remove('hidden');
+                        startBtn.innerText = "PLAY GAME";
+                    }
+
+                    startBtn.addEventListener('click',startGame);
+                    exitBtn.addEventListener('click',exitGameHandle);
+                    inGameExitBtn.addEventListener('click',exitGameHandler);
+
+                    drawScenery();
+                    cactus.draw();
+</script>
+                
+                        
+
+                            
                         
                 
                      
@@ -995,7 +1050,6 @@
 
 
 
-</script>
 
             
 </html>
