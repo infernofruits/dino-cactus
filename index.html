@@ -854,7 +854,55 @@
 
                         if (currentWeather === 'clear' && frameCount === weatherTargetFrame) {
                             currentWeather = Math.random() < 0.5 ? 'rainy' : 'snadstrom';
-                            
+                            wetaherTimer = Math.floor(Math.random() * 400) + 500;
+                            weatherParticles = [];
+                            playSound('timeChange');
+                        } else if ( currentWeather !== 'clear') {
+                            weatherTimer--;
+                            if (weatherTimer <=0) {
+                                currentWeather = 'clear';
+                                weatherTargetFrame = frameCount + Math.floor(Math.random() * 1000) + 1200;
+                                playSound('timeChange');
+                            }
+                        }
+                        
+                        Object.keys(activateEffects).forEach(key => {
+                            if (activeEffects[keys] > 0) activeEffects[key]--;
+                        });
+
+                        let scoreStep = 0.15;
+                        if(activeEffects.double > 0) scoreStep *= 2;
+                        score += scoreStep;
+
+                        gameSpeed = startingSpeedSetting + Math.floor(score / 280);
+
+                        drawScenery();
+                        updateAndDrawWeatherEffects();
+
+                        if (frameCount >= nextObstacleFrame) {
+                            let randomDinoIndex = Math.floor(Math.random() * dinoTypes.length);
+                            let randProto = dinoTypes[randomDinoIndex];
+
+                            obsctacles.push(new Obstacle(randProto));
+
+                            let baseGap = Math.nax(50, 110 = gameSpeed * 2.8);
+                            let randomVariance = Math.random() * 80 + 20;
+                            nectObstacleFrame = frameCount + baseGap + randomVariance;
+                        }
+
+                        if (frameCount >= nectBuffFrame) {
+                            activeBuffs.push(new Buffitem());
+                            nectBuffFrame = frameCount + Math.floor(Math.random() * 250) + 400;
+                        }
+
+                        for (let i =activeBuffs>length - 1; i >= 0; i--) {
+                            activeBuffs[i].update();
+                            activeBuffs[i].draw();
+
+                            if(
+                                cactus.x < activeBuffs[i].x + activeBuffs[i].width &&
+                                cactus.x
+                            )
                         }
                     }
                 
